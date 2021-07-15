@@ -1,0 +1,93 @@
+
+# example from https://github.com/onedr0p/home-cluster/tree/main
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: ingress-nginx-charts
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://kubernetes.github.io/ingress-nginx
+  timeout: 3m
+
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ingress-nginx
+      version: 3.34.0
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    controller:
+      ingressClass: nginx
+      replicaCount: 2
+      extraEnvs:
+      - name: TZ
+        value: America//Los_Angeles
+      service:
+        type: LoadBalancer
+        externalIPs:
+        - 128.9.35.117
+        - 128.9.35.120
+        - 128.9.35.121
+        hostNetwork: false
+        hostPort:
+          enabled: true
+          ports:
+            http: 80
+            https: 443
+        externalTrafficPolicy: Local
+      publishService:
+        enabled: true
+      config:
+        worker-processes: 4
+        ssl-protocols: "TLSv1.3 TLSv1.2"
+        # Setting use-proxy-protocol to true will break the proxy
+        use-proxy-protocol: "false"
+        proxy-body-size: "100m"
+        use-forwarded-headers: "true"
+      metrics:
+        enabled: true
+        service:
+          annotations:
+            prometheus.io/port: "10254"
+            prometheus.io/scrape: "true"
+      resources:
+        requests:
+          memory: 3000Mi
+          cpu: 4
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - "pegacorn-worker-1.isi.edu"
+                - "pegacorn-worker-2.isi.edu"
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - ingress-nginx
+            topologyKey: "kubernetes.io/hostname"
+    defaultBackend:
+      enabled: false
+
+
