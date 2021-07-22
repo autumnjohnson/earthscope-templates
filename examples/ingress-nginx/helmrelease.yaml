@@ -1,18 +1,6 @@
 
 # example from https://github.com/onedr0p/home-cluster/tree/main
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: ingress-nginx-charts
-  namespace: flux-system
-spec:
-  interval: 10m
-  url: https://kubernetes.github.io/ingress-nginx
-  timeout: 3m
-
-
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -39,9 +27,7 @@ spec:
       service:
         type: LoadBalancer
         externalIPs:
-        - 128.9.35.117
-        - 128.9.35.120
-        - 128.9.35.121
+        - 192.168.6.23
         hostNetwork: false
         hostPort:
           enabled: true
@@ -76,8 +62,7 @@ spec:
               - key: kubernetes.io/hostname
                 operator: In
                 values:
-                - "pegacorn-worker-1.isi.edu"
-                - "pegacorn-worker-2.isi.edu"
+                - "dev1-node-3.novalocal"
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
