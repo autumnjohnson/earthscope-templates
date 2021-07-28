@@ -18,20 +18,38 @@ Commands for ingress-nginx:
 
 Confirm installation or upgrade:
 
-6.   `POD_NAME=$(kubectl get pods -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[0].metadata.name}') kubectl exec -it $POD_NAME -- /nginx-ingress-controller --version`
-7.   `curl -D- http://www-dev1.ds.iris.edu`
+-   `POD_NAME=$(kubectl get pods -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[0].metadata.name}') kubectl exec -it $POD_NAME -- /nginx-ingress-controller --version`
+-   `curl -D- http://www-dev1.ds.iris.edu`
 
 To uninstall completely:
 
-1.  `helm uninstall ingress-nginx -n ingress-nginx
+-  `helm uninstall ingress-nginx -n ingress-nginx
+
 
 ## cert-manager
+
+### CustomResourceDefinitions
+To install the CustomResourceDefinitions:
+-   ` kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.1/cert-manager.crds.yaml`
+        customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
+        customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
+        customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
+        customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
+        customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
+        customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
+
+To uninstall the CustomResourceDefinitions (if you want to completely uninstall cert-manager):
+-   `kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.4.1/cert-manager.crds.yaml
 
 Commands for cert-manager:
 -   `helm repo add jetstack https://charts.jetstack.io`
 -   `helm repo update`
+-   `kubectl apply -f cert-manager/namespace.yaml`
+-   `helm show values jetstack/cert-manager > cert-manager/values.yaml`
+-   `helm -f cert-manager/values.yaml install cert-manager jetstack/cert-manager --namespace cert-manager`
 
-
+To remove:
+- `helm repo remove jetstack https://charts.jetstack.io`
 
 ## Test service http-svc
 - kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/http-svc.yaml
