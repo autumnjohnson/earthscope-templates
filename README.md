@@ -6,6 +6,8 @@ Directories:
     * /examples
     * /prometheus
     * /grafana
+     
+             curl -D- http://192.168.6.23 -H 'Host: www-dev1.ds.iris.edu'
 
 
 ## ingress-nginx
@@ -25,43 +27,13 @@ Confirm installation or upgrade:
 
 To uninstall completely:
 
-1.  `helm uninstall ingress-nginx -n ingress-nginx`
+1.  `helm uninstall ingress-nginx -n ingress-nginx
 
-## prometheus
+## cert-manager
 
-Steps to install prometheus:
-
-- `kubectl apply --kustomize earthscope-templates/prometheus`
-
--  `helm upgrade -f values.yaml ingress-nginx ingress-nginx/ingress-nginx \`
--   --namespace ingress-nginx \`
--   --set controller.metrics.enabled=true \`
--   --set-string controller.podAnnotations."prometheus\.io/scrape"="true" \`
--   --set-string controller.podAnnotations."prometheus\.io/port"="10254"`
-
-
-Confirm installation or upgrade:
-
--  `kubectl get svc -n ingress-nginx`
-
-##  grafana
-
-
-Steps to install prometheus:
-
-- `kubectl apply --kustomize earthscope-templates/grafana`
-
-
-
-https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/
-Todo?
-Obtain the IP address of the nodes in the running cluster:
-
--   `kubectl get nodes -o wide`
-
-In some cases where the node only have internal IP addresses we need to execute:
-
-curl -r http://github.com/kubernetes/ingress-nginx/deploy/prometheus/ prometheus
+Commands for cert-manager:
+-   `helm repo add jetstack https://charts.jetstack.io`
+-   `helm repo update`
 
 ## Test service http-svc
 - kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/http-svc.yaml
