@@ -47,9 +47,16 @@ Commands for cert-manager:
 -   `kubectl apply -f cert-manager/namespace.yaml`
 -   `helm show values jetstack/cert-manager > cert-manager/values.yaml`
 -   `helm -f cert-manager/values.yaml install cert-manager jetstack/cert-manager --namespace cert-manager`
+-   `helm upgrade cert-manager jetstack/cert-manager -f cert-manager/values.yaml -n cert-manager`
 
 To remove:
+- `helm uninstall cert-manager jetstack\cert-manager`
 - `helm repo remove jetstack https://charts.jetstack.io`
+
+To install a ClusterIssuer certificate:
+-   `kubectl create -f cert-manager/cluster-issuer/letsencrypt-staging.yaml`
+
+
 
 ## Test service http-svc
 - kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/http-svc.yaml
