@@ -31,6 +31,8 @@ Commands for cert-manager:
 -   `helm repo add jetstack https://charts.jetstack.io`
 -   `helm repo update`
 
+
+
 ## Test service http-svc
 - kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/http-svc.yaml
 - kubectl patch svc http-svc -p '{"spec":{"type": "LoadBalancer"}}'
