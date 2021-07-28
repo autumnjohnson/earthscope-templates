@@ -4,15 +4,16 @@ Directories:
 * /earthscope-templates
     * /ingress-nginx
     * /examples
-    * /cert-manager
-    * /monitoring
+    * /prometheus
+    * /grafana
+
 
 ## ingress-nginx
 
 Commands for ingress-nginx:
 -    `kubectl apply -f  ingress-nginx/namespace.yaml`
 -    `helm add repo ingress-nginx`
--    `helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx -f ingress-nginx/values.yaml`
+-    `helm  -f ingress-nginx/values.yaml install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx`
 -    `helm show values ingress-nginx/ingress-nginx > values.yaml`
 -    `helm install ingress-nginx ingress-nginx/ingress-nginx -f values.yaml`
 -    `helm upgrade ingress-nginx ingress-nginx/ingress-nginx -f values.yaml`
@@ -24,13 +25,20 @@ Confirm installation or upgrade:
 
 To uninstall completely:
 
-1.  `helm uninstall ingress-ngeinx ingress-nginx/ingress-nginx`
+1.  `helm uninstall ingress-nginx -n ingress-nginx`
 
 ## prometheus
 
 Steps to install prometheus:
 
 - `kubectl apply --kustomize earthscope-templates/prometheus`
+
+-  `helm upgrade -f values.yaml ingress-nginx ingress-nginx/ingress-nginx \`
+-   --namespace ingress-nginx \`
+-   --set controller.metrics.enabled=true \`
+-   --set-string controller.podAnnotations."prometheus\.io/scrape"="true" \`
+-   --set-string controller.podAnnotations."prometheus\.io/port"="10254"`
+
 
 Confirm installation or upgrade:
 
@@ -59,3 +67,9 @@ curl -r http://github.com/kubernetes/ingress-nginx/deploy/prometheus/ prometheus
 - kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/http-svc.yaml
 - kubectl patch svc http-svc -p '{"spec":{"type": "LoadBalancer"}}'
 - kubectl get svc http-svc
+
+helm upgrade -f values.yaml ingress-nginx ingress-nginx/ingress-nginx \
+--namespace ingress-nginx \
+--set controller.metrics.enabled=true \
+--set-string controller.podAnnotations."prometheus\.io/scrape"="true" \
+--set-string controller.podAnnotations."prometheus\.io/port"="10254"
