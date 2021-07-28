@@ -4,12 +4,8 @@ Directories:
 * /earthscope-templates
     * /ingress-nginx
     * /examples
-    * /prometheus
-    * /grafana
+    * /cert-manager
      
-             curl -D- http://192.168.6.23 -H 'Host: www-dev1.ds.iris.edu'
-
-
 ## ingress-nginx
 
 Commands for ingress-nginx:
