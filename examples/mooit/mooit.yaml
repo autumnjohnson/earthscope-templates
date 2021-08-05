@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mooit
+  name: mooit-yaml
+  namespace: demo
+spec:
+  selector:
+    matchLabels:
+      app: mooit
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mooit
+    spec:
+      containers:
+      - image: bgulla/mooit
+        name: mooit
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mooit
+  name: mooit-svc
+  namespace: demo
+spec:
+  ports:
+  - name: "5000"
+    port: 5000
+    targetPort: 5000
+  selector:
+    app: mooit
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mooit-svc
+  namespace: demo
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  rules:
+  - host: www-dev1.ds.iris.edu
+    http:
+      paths:
+      - path: /mooit/(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: mooit-svc
+            port:
+              number: 5000
+  tls:
+  - hosts:
+    - "www-dev1.ds.iris.edu"
+    secretName: www-dev1-ds-iris-edu
+
+

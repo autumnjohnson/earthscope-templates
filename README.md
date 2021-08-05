@@ -20,6 +20,7 @@ Confirm installation or upgrade:
 
 -   `POD_NAME=$(kubectl get pods -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[0].metadata.name}') kubectl exec -it $POD_NAME -- /nginx-ingress-controller --version`
 -   `curl -D- http://www-dev1.ds.iris.edu`
+-   `kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller`
 
 To uninstall completely:
 
@@ -55,16 +56,10 @@ To remove:
 
 To install a ClusterIssuer certificate:
 -   `kubectl create -f cert-manager/cluster-issuer/letsencrypt-staging.yaml`
+-   `kubectl create -f cert-manager/cluster-issuer/letsencrypt-production.yaml`
 
-
-
-## Test service http-svc
-- kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/http-svc.yaml
-- kubectl patch svc http-svc -p '{"spec":{"type": "LoadBalancer"}}'
-- kubectl get svc http-svc
-
-helm upgrade -f values.yaml ingress-nginx ingress-nginx/ingress-nginx \
---namespace ingress-nginx \
---set controller.metrics.enabled=true \
---set-string controller.podAnnotations."prometheus\.io/scrape"="true" \
---set-string controller.podAnnotations."prometheus\.io/port"="10254"
+## prometheus
+Commands for ingress-nginx:
+-   `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`
+-   `helm  install prometheus-community prometheus-community/kube-state-metrics -n monitoring`
+`
