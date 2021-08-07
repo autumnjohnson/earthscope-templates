@@ -12,7 +12,6 @@ metadata:
 spec:
   ports:
   - name: web
-    nodePort: 30903
     port: 9093
     targetPort: web
   selector:
@@ -22,4 +21,3 @@ spec:
     app.kubernetes.io/name: alertmanager
     app.kubernetes.io/part-of: kube-prometheus
   sessionAffinity: ClientIP
-  type: NodePort
