@@ -9,6 +9,12 @@
 
 The kube-prometheus project bundles a whole bunch of useful libraries that together provide full-featured monitoring stack for  Kubernetes clusters.
 
+### Directory structure
+
+/kube-prometheus
+    /manifests:     The build directory. These are deleted and regenerated after each compilation
+    /vendor:        These bundled library files 
+
 ### Updating the project
 
 To update the  kube-prometheus dependency (and its constituent dependencies) simply use the jsonnet-bundler update functionality:

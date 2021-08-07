@@ -12,6 +12,14 @@ local kp =
       common+: {
         namespace: 'monitoring',
       },
+      grafana+:: {
+        config: {  // http://docs.grafana.org/installation/configuration/
+          sections: {
+            'auth.anonymous': { enabled: true },
+          },
+        },
+      },
+
     },
   };
 
