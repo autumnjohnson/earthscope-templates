@@ -5,7 +5,7 @@ Directories:
     * /ingress-nginx
     * /examples
     * /cert-manager
-     
+    * /kube-prometheus
 ## ingress-nginx
 
 Commands for ingress-nginx:
@@ -32,13 +32,7 @@ To uninstall completely:
 ### CustomResourceDefinitions
 To install the CustomResourceDefinitions:
 -   ` kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.1/cert-manager.crds.yaml`
-        customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-        customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-        customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-        customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-        customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-        customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-
+-   
 To uninstall the CustomResourceDefinitions (if you want to completely uninstall cert-manager):
 -   `kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.4.1/cert-manager.crds.yaml
 
@@ -59,7 +53,85 @@ To install a ClusterIssuer certificate:
 -   `kubectl create -f cert-manager/cluster-issuer/letsencrypt-production.yaml`
 
 ## prometheus
-Commands for ingress-nginx:
--   `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`
--   `helm  install prometheus-community prometheus-community/kube-state-metrics -n monitoring`
-`
+
+
+| Project         | Version | Repository                                               |
+| --------------- | ------- | -------------------------------------------------------- |
+| kubernetes      | v1.21.2 | -                                                        |
+| kube-prometheus | v0.8.0  | <https://github.com/prometheus-operator/kube-prometheus> |
+
+
+The kube-prometheus project bundles a whole bunch of useful libraries that together provide full-featured monitoring stack for  Kubernetes clusters.
+
+### Directory structure
+
+/kube-prometheus
+    /manifests:     The build directory. These are deleted and regenerated after each compilation
+    /vendor:        These bundled library files 
+
+### Updating the project
+
+To update the  kube-prometheus dependency (and its constituent dependencies) simply use the jsonnet-bundler update functionality:
+
+> jb update
+
+The following packages, which are part of kube-prometheus, will be updated:
+
+- <https://github.com/prometheus-operator/kube-prometheus>
+- <https://github.com/kubernetes-monitoring/kubernetes-mixin>
+- <https://github.com/etcd-io/etcd>
+- <https://github.com/prometheus-operator/prometheus-operator>
+- <https://github.com/prometheus-operator/prometheus-operator>
+- <https://github.com/kubernetes/kube-state-metrics>
+- <https://github.com/kubernetes/kube-state-metrics>
+- <https://github.com/prometheus/node_exporter>
+- <https://github.com/prometheus/prometheus>
+- <https://github.com/prometheus/alertmanager>
+- <https://github.com/brancz/kubernetes-grafana>
+- <https://github.com/thanos-io/thanos>
+- <https://github.com/ksonnet/ksonnet-lib>
+- <https://github.com/grafana/grafonnet-lib>
+- <https://github.com/grafana/jsonnet-libs>
+- <https://github.com/kubernetes-monitoring/kubernetes-mixin>
+
+### Compiling the project
+
+> ./build.sh earthscope-monitoring.jsonnet
+
+## Installing manifests in a Kubernetes cluster
+
+### Create the namespace and CRDs, and then wait for them to be available before creating the remaining resources
+
+> kubectl create -f manifests/setup
+> until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; done
+> kubectl create -f manifests/
+
+### Update the namespace and CRDs, and then wait for them to be available before creating the remaining resources
+
+> kubectl apply -f manifests/setup
+> kubectl apply -f manifests/
+
+### Delete stack
+
+> kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+
+## Port-forward
+
+Prometheus
+
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+
+Then access via http://localhost:9090
+
+Grafana
+
+$ kubectl --namespace monitoring port-forward svc/grafana 3000
+
+Then access via http://localhost:3000 and use the default grafana user:password of 
+admin:admin.
+
+Alert Manager
+
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
+
+Then access via http://localhost:9093
