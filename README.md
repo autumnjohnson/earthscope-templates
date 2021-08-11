@@ -115,23 +115,418 @@ The following packages, which are part of kube-prometheus, will be updated:
 
 > kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
 
-## Port-forward
+## Exposing monitoring services on your local machine
 
-Prometheus
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
 
-$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+Visit http://localhost:9999 on your local machine.
 
-Then access via http://localhost:9090
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
 
-Grafana
+Visit http://localhost:9999 on your local machine.
 
-$ kubectl --namespace monitoring port-forward svc/grafana 3000
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
 
-Then access via http://localhost:3000 and use the default grafana user:password of 
-admin:admin.
+Visit http://localhost:9999 on your local machine.
 
-Alert Manager
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
 
-$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
+Visit http://localhost:9999 on your local machine.
 
-Then access via http://localhost:9093
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Prometheus:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9999:9090
+
+Visit http://localhost:9999 on your local machine.
+
+To expose Grafana:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/grafana 9999:3000
+
+Visit http://localhost:9999 on your local machine.
+
+To expose AlertManager:
+$ ssh -L 9999:localhost:9999 devops@xsede-dev1.ds.iris.edu
+$ kubectl --namespace monitoring port-forward svc/alertmanager-main 9999:9093
+
+Visit http://localhost:9999 on your local machine.
