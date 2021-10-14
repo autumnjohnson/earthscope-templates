@@ -208,7 +208,7 @@ controller:
          - key: kubernetes.io/hostname
            operator: In
            values:
-           - "dev2-node-3.novalocal"
+           - "dev1-node-3.novalocal"
   
     # # An example of preferred pod anti-affinity, weight is in the range 1-100
     # podAntiAffinity:
@@ -412,7 +412,7 @@ controller:
     ## List of IP addresses at which the controller services are available
     ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
     ##
-    externalIPs: [192.168.6.23]
+    externalIPs: [192.168.7.17]
 
     # loadBalancerIP: ""
     loadBalancerSourceRanges: []
